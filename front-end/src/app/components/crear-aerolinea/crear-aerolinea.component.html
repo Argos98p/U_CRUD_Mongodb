@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <div class="col-lg-10 offset-lg-2">
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <span class="titulo">
+                        {{titulo | uppercase}}
+                    </span>
+                    <form action="" class="mt-3" [formGroup]="aerolineaForm" (ngSubmit)='agregarAerolinea()'>
+                        <div class="mb-3">
+
+                            <label  class="form-label">Code</label>
+                            <input type="text" class="form-control" formControlName="Code">
+                            <div class="text-danger" *ngIf="aerolineaForm.get('Code')?.hasError('required') && aerolineaForm.get('Code')?.touched">
+                               
+                                <span>
+                                El Code del producto <strong>es obligatorio</strong>
+                            </span></div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label  class="form-label">Description</label>
+                            <input type="text" class="form-control" formControlName="Description">
+                        </div>
+
+                        <div class="mt-3">
+                            <button [routerLink]="['/']" routerLinkActive="router-link-active"  class="btn btn-secondary float-start">
+                                Volver
+                            </button>
+                            <button class="btn btn-success float-end" type="submit" [disabled]="aerolineaForm.invalid">
+                                Aceptar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

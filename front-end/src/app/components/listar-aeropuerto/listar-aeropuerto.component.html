@@ -1,0 +1,61 @@
+<div class=" mt-5">
+    <div class="row">
+        <div class="col-lg-11 ">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">Lista Aeropuertos</span>
+                    <button class="btn btn-success float-end" [routerLink]="['/crear-aeropuerto']" routerLinkActive="router-link-active" > Nuevo</button>
+                    <table class="table  mt-3 ">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Pais</th>
+
+                            <th scope="col">Iata</th>
+                            <th scope="col">Latitud</th>
+                            <th scope="col">Longitud</th>
+                            <th scope="col">Estado</th>
+
+                            <th scope="col">Acciones</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let aeropuerto of listAeropuertos | paginate: { itemsPerPage: 10, currentPage: p}" >
+                            <td><a href="#">{{aeropuerto._id}}</a></td>
+                            <td>{{aeropuerto.airport}}</td>
+                            <td>{{aeropuerto.city}}</td>
+                            <td>{{aeropuerto.country}}</td>
+                            <td>{{aeropuerto.iata}}</td>
+                            <td>{{aeropuerto.lat}}</td>
+                            <td>{{aeropuerto.long}}</td>
+                            <td>{{aeropuerto.state}}</td>
+
+                            
+                            <td>
+                              <a href='editar-aeropuerto/{{aeropuerto._id}}'><i class="mr-2 fas fa-edit text-primary"></i></a> 
+                                <!-- <i [routerLink]="['editar-aeropuerto',aeropuerto._id]" routerLinkActive="router-link-active" class="mr-2 fas fa-edit text-primary"></i> -->
+                                <i (click)=eliminarAeropuerto(aeropuerto._id) class="fas fa-trash text-danger"></i>
+                            </td>                            
+                          </tr>                                                   
+                        </tbody>
+                        <pagination-controls class="text-light my-pagination" (pageChange)="p = $event"></pagination-controls>
+
+                      </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<router-outlet></router-outlet>

@@ -1,0 +1,62 @@
+<div class=" mt-5">
+    <div class="row">
+        <div class="col-lg-11 ">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">Lista Aviones</span>
+                    <button class="btn btn-success float-end" [routerLink]="['/crear-avion']" routerLinkActive="router-link-active" > Nuevo</button>
+                    <table class="table  mt-3 ">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo Avion</th>
+                            <th scope="col">Motor</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Fabricante</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Num Cola</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Anio</th>
+                            <th scope="col">Acciones</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let avion of listAviones | paginate: { itemsPerPage: 10, currentPage: p}" >
+                            <td><a href="#">{{avion._id}}</a></td>
+                            <td>{{avion.aircraft_type}}</td>
+                            <td>{{avion.engine_type}}</td>
+                            <td>{{avion.issue_date}}</td>
+                            <td>{{avion.manufacturer}}</td>
+                            <td>{{avion.model}}</td>
+                            <td>{{avion.status}}</td>
+                            <td>{{avion.tailnum}}</td>
+                            <td>{{avion.type}}</td>
+                            <td>{{avion.year}}</td>
+
+                            
+                            <td>
+                              <a href="editar-avion/{{avion._id}}" ><i  class="mr-2 fas fa-edit text-primary"></i></a>
+                                <!-- <i [routerLink]="['editar-avion',avion._id]" class="mr-2 fas fa-edit text-primary"></i> -->
+                                <i (click)=eliminarAvion(avion._id) class="fas fa-trash text-danger"></i>
+                            </td>                            
+                          </tr>                                                   
+                        </tbody>
+                        <pagination-controls class="text-light my-pagination" (pageChange)="p = $event"></pagination-controls>
+                      </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<router-outlet></router-outlet>
